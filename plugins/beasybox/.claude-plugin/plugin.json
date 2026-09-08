@@ -1,0 +1,14 @@
+{
+  "name": "beasybox",
+  "description": "Conector da Beasybox e os roteiros para trabalhar numa tarefa do consultor: ler o contexto inteiro, produzir a entrega, devolvê-la à plataforma e mover a tarefa para revisão.",
+  "version": "1.997.0",
+  "author": {
+    "name": "Beasybox"
+  },
+  "homepage": "https://beasybox.com",
+  "keywords": [
+    "beasybox",
+    "consultoria",
+    "mcp"
+  ]
+}
