@@ -7,4 +7,4 @@ Publicado automaticamente pelo CI de `consultores-beasybox` — não edite à m�
 /plugin install beasybox@beasybox-plugins
 ```
 
-Versão atual: 1.1516.0 (consultores-beasybox ab97274).
+Versão atual: 1.1528.0 (consultores-beasybox fdf567e).

@@ -60,9 +60,9 @@ carteira. Você só controla o primeiro.
    Se sobrar mais, use o `import_id` que a primeira chamada devolveu nas chamadas seguintes, para
    somar ao mesmo lote em vez de abrir um novo a cada vez. Se a ferramenta recusar algum item, a
    resposta traz o motivo junto com o limite que faltou — corrija e reenvie só os itens recusados,
-   não o lote inteiro de novo. Um fato comum tem teto de 280 caracteres em `text`; só um fato de
-   seção `resumo`, e os itens de empresa e de documento, vão até 600 — um modelo que ignore essa
-   diferença escreve parágrafos e tem os fatos recusados por `texto_longo`.
+   não o lote inteiro de novo. Um fato tem teto de **280** caracteres em `text`; empresa e
+   documento vão até 600 — um modelo que ignore essa diferença escreve parágrafos e tem os fatos
+   recusados por `texto_longo`.
 
 6. **Termine com o link, não com "pronto".** Chame `beasybox_get_import_status` com o `import_id`
    e passe ao consultor o endereço da triagem que ele devolve. **Não diga que o contexto "já está
@@ -74,13 +74,14 @@ carteira. Você só controla o primeiro.
 - Chamar `beasybox_import_context` antes de o consultor ver os itens e aprovar.
 - Dizer que a busca "varreu todas as conversas" — ela buscou pelo que este roteiro mandou buscar.
 - Enviar senha, token, chave, ou assunto que não é de cliente, mesmo que só no trecho original.
-- Prometer 600 caracteres para um fato fora da seção `resumo` — o teto dele é 280.
+- Prometer 600 caracteres para um fato — o teto dele é 280; 600 é de empresa e documento.
 - Dizer ao consultor que o contexto "entrou" ou "já está lá" antes da triagem dele.
 - **Propor um fato com `section: "resumo"`.** O cartão de resumo de cada cliente é ÚNICO e
-  gerado automaticamente pela plataforma, que apaga o anterior antes de gravar o novo toda vez
-  que roda. Um fato de resumo que você importar e o consultor aprovar hoje é apagado em SILÊNCIO
-  na próxima geração — sem aviso na tela, sem erro em lugar nenhum. Use qualquer outra seção
-  (empresa, pessoas, mercado, dores, oportunidades, decisoes, riscos) para o mesmo conteúdo.
+  gerado pela plataforma a partir dos outros cartões, apagando o anterior antes de gravar o novo.
+  Importar um resumo seria importar um cálculo, não um fato — e a plataforma **recusa**, com o
+  motivo `secao_reservada`, em vez de aceitar algo que depois seria apagado em silêncio. Use
+  qualquer outra seção (empresa, pessoas, mercado, dores, oportunidades, decisoes, riscos) para o
+  mesmo conteúdo: é assim que o que você achou entra no resumo, pela geração seguinte.
 
 ## Se a conexão não estiver disponível
 
