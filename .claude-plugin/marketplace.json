@@ -11,7 +11,7 @@
     {
       "name": "beasybox",
       "source": "./plugins/beasybox",
-      "version": "1.2007.0",
+      "version": "1.2109.0",
       "description": "Conector da Beasybox e os roteiros para trabalhar numa tarefa do consultor: ler o contexto inteiro, produzir a entrega, devolvê-la à plataforma e mover a tarefa para revisão."
     }
   ]

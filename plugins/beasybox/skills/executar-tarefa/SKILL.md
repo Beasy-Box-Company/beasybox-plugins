@@ -47,7 +47,10 @@ autorizou a conexão. Este roteiro é a ordem certa de usar as ferramentas para 
    - **Se o resultado é arquivo** (docx, xlsx, pptx, pdf, imagem), chame `beasybox_request_upload`
      com o id da tarefa e o nome do arquivo com a extensão, e rode o `curl` da resposta trocando
      o caminho local pelo do arquivo. O link vale uma vez e por 15 minutos; vencido ou recusado,
-     peça outro. A resposta do `curl` traz o `document_id`.
+     peça outro. A resposta do `curl` traz o `document_id`. Se o `curl` falhar por rede (host não
+     resolvido, conexão recusada, proxy, 403 do sandbox), o arquivo **não** subiu: diga isso ao
+     consultor com o erro, explique que o domínio do link precisa estar liberado na rede do seu
+     ambiente, e ofereça salvar o conteúdo como texto com `beasybox_add_deliverable`.
    - Cada chamada cria um documento novo: não repita para "atualizar".
 9. **Registre a sessão e mova para revisão.** Chame `beasybox_add_session_log` com o que foi
    feito, o que ficou aberto e o `document_id` do passo anterior. Depois, `beasybox_update_task`
