@@ -2,7 +2,7 @@
   "mcpServers": {
     "beasybox": {
       "type": "http",
-      "url": "https://consultores-beasybox-production.up.railway.app/mcp"
+      "url": "https://hub.beasybox.com/mcp"
     }
   }
 }
