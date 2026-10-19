@@ -50,7 +50,8 @@ Dois "sim" são obrigatórios, e o servidor os exige: para **começar quando vai
      o lê como os outros; até 300 KB por chamada, divida em partes se passar (com os números originais das páginas);
    - no claude.ai, uma foto ou um scan (que você não lê como texto): `arquivo: { nome,
      tamanho_bytes }` e mande ao consultor a `pagina_de_envio_url` — ele solta o arquivo lá.
-   Até 10 arquivos de 20 MB: PDF, PNG, JPG, XLSX ou CSV (o `.txt` das páginas, 300 KB).
+   Até 10 arquivos de 200 MB: PDF, PNG, JPG, XLSX ou CSV (o `.txt` das páginas, 300 KB). Imagem
+   acima de 7,5 MB e planilha acima de 10 MB não são lidas: peça uma versão menor.
 5. **Leia.** `beasybox_credit_analysis_extract` com o `lock_version` atual, **uma vez, depois de
    anexar tudo** (chamar de novo refaz a leitura inteira). Ela espera a leitura até 45 s; se vier
    `estado: "em_andamento"`, chame `beasybox_credit_analysis_get` até a leitura terminar. Mostre
@@ -59,7 +60,13 @@ Dois "sim" são obrigatórios, e o servidor os exige: para **começar quando vai
    alerta, pergunte: linha faltando → "qual o valor?"; incoerência → "confere? qual é o certo?";
    duas empresas → "qual é a principal?"; unidade incerta → "está em reais ou em milhares?".
    Grave as respostas com `beasybox_credit_analysis_set_values` (e `setor`/`exercicios` por lá
-   também; até 80 células por chamada). Se `extract` devolver `estado: "indisponivel"`, leia os arquivos você mesmo e grave
+   também; até 80 células por chamada). Se `extract` devolver `paginas_demais` (um PDF acima de
+   ~24 MB com mais de 60 páginas, como um relatório anual), pergunte: "o PDF tem N páginas — em
+   quais estão o Balanço e a DRE?". Se você tem o arquivo, leia essas páginas e mande-as por
+   `attach` com `paginas` (com os números originais); se não tem (ele subiu pela página de um
+   clique), peça ao consultor um PDF só com essas páginas. Depois, com o sim dele, tire o PDF
+   grande da análise com `beasybox_credit_analysis_detach` — o arquivo que falhou com exercício
+   marcado bloqueia a confirmação (ele continua no acervo). Se `extract` devolver `estado: "indisponivel"`, leia os arquivos você mesmo e grave
    tudo com `set_values`. Repita `get` até a `verificacao` ficar sem `bloqueios`.
 6. **Confirme.** `beasybox_credit_analysis_confirm`. Mostre o `resultado_resumido`: parecer (base
    e melhor cenário), limites de crédito e de giro, os positivos de sete índices e os alertas.
