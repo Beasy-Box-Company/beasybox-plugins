@@ -43,9 +43,14 @@ Dois "sim" são obrigatórios, e o servidor os exige: para **começar quando vai
    - já no acervo: `document_id` (mais `tipo` e `exercicio`, se souber);
    - na sua máquina ou sandbox (Claude Code, Cowork): `arquivo: { nome, tamanho_bytes }` → a
      resposta traz a `upload_url` e o `curl` pronto; rode o comando com o caminho local. O link
-     vale uma vez e por 15 minutos. Se o `curl` falhar por rede, diga isso ao consultor com o
-     erro e peça que anexe pela plataforma (o `link` da análise).
-   Até 10 arquivos de 20 MB: PDF, PNG, JPG, XLSX ou CSV.
+     vale uma vez e por 15 minutos. Se o `curl` falhar por rede, mande ao consultor a
+     `pagina_de_envio_url` da mesma resposta: ele abre, solta o arquivo e a página envia;
+   - no claude.ai, um PDF ou uma planilha que você consegue LER: `paginas: [{ numero, texto }]`
+     com o texto de cada página (e `nome_original`) — a plataforma guarda um `.txt` por página e
+     o lê como os outros; até 300 KB por chamada, divida em partes se passar (com os números originais das páginas);
+   - no claude.ai, uma foto ou um scan (que você não lê como texto): `arquivo: { nome,
+     tamanho_bytes }` e mande ao consultor a `pagina_de_envio_url` — ele solta o arquivo lá.
+   Até 10 arquivos de 20 MB: PDF, PNG, JPG, XLSX ou CSV (o `.txt` das páginas, 300 KB).
 5. **Leia.** `beasybox_credit_analysis_extract` com o `lock_version` atual, **uma vez, depois de
    anexar tudo** (chamar de novo refaz a leitura inteira). Ela espera a leitura até 45 s; se vier
    `estado: "em_andamento"`, chame `beasybox_credit_analysis_get` até a leitura terminar. Mostre
